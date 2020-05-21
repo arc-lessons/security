@@ -1,0 +1,24 @@
+dist: xenial
+language: python
+python:
+  - 3.7
+
+install:
+  - pip install nbfancy
+  - pip install --upgrade nbfancy
+
+script:
+  - nbfancy configure -y all_magic 
+  - nbfancy render
+  - nbfancy html
+
+deploy:
+  provider: pages
+  repo: arc-lessons/security
+  target-branch: gh-pages
+  local-dir: html
+  github_token: $GITHUB_TOKEN
+  skip-cleanup: true
+  on:
+    branch: master
+    python: 3.7
